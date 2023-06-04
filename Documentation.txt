@@ -1,0 +1,11 @@
+Unity version : 2021.3.10f1 <DX11>
+With Visual Studio Community 2022 v17.5.4
+
+1. Install Input System (1.4.4)
+	a) Create and configure an Input Actions (named Actions_Test). Actions divided by category and control Schemes.
+
+2. Create the Input_Test script. Import/Call the InputSystem library.
+
+3. Enable touch simulation in unity. Window > Analysis > Input Debugger > Options > Simulate Touch Input From Mouse or Pen
+
+PD: Plane texture from https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-textures-204742

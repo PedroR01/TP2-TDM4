@@ -10,6 +10,7 @@ public class Load_Next_Level : MonoBehaviour
     [SerializeField]
     private GameObject back_Button;
 
+    [Tooltip("Valor que indica a que nivel dirige el boton")]
     public int buttonLevel;
 
     private void Awake()
@@ -17,9 +18,10 @@ public class Load_Next_Level : MonoBehaviour
         actualScene = SceneManager.GetActiveScene();
     }
 
+    // Funcion para cambiar de nivel
     private void LoadLevel(int levelNumber)
     {
-        switch (levelNumber)
+        switch (levelNumber) // Dependiendo del numero recibido por parametro es al nivel que va a cambiar
         {
             case 0:
                 SceneManager.LoadScene("Main_Menu"); back_Button.SetActive(false);
@@ -39,6 +41,7 @@ public class Load_Next_Level : MonoBehaviour
         }
     }
 
+    // Funcion visible desde el inspector. Es la que llama a la funcion para cambiar de nivel.
     public void LevelTrigger()
     {
         LoadLevel(buttonLevel);
@@ -63,9 +66,9 @@ public class Load_Next_Level : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
+    // Salir de la aplicacion desde el menu.
     public void OnQuit()
     {
-        Debug.Log("as");
         Application.Quit();
     }
 }
