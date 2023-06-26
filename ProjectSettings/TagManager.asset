@@ -10,11 +10,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Light
   - Water
   - UI
-  - 
-  - 
+  - Triangle
+  - Player
   - 
   - 
   - 

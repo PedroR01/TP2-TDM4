@@ -20,6 +20,15 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody rb;
 
+    private float rotationSpeed = 90f;
+    private float smoothTime = 1f;
+
+    private Quaternion targetRotation;
+    private Quaternion initialRotation;
+    private Quaternion currentRotation;
+    private float timer;
+    private bool isRotating;
+
     private void Awake()
     {
         this.rb = GetComponent<Rigidbody>();
@@ -28,6 +37,11 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        initialRotation = transform.rotation;
+        currentRotation = transform.rotation;
+        timer = 0f;
+        isRotating = false;
     }
 
     private void FixedUpdate()
@@ -45,13 +59,18 @@ public class Enemy : MonoBehaviour
                 break;
 
             case 1: // Los enemigos del nivel xenofobia
+                this.gameObject.layer = 6;
                 Wall();
+                this.GetComponent<Rigidbody>().mass = 20;
+                this.GetComponent<Rigidbody>().drag = 20;
+                this.GetComponent<Rigidbody>().angularDrag = 20;
                 break;
 
             case 2: // Los enemigos del nivel vanidad
                 break;
 
             case 3: // Los enemigos del nivel desinteres
+                Ignore();
                 break;
 
             default:
@@ -103,6 +122,32 @@ public class Enemy : MonoBehaviour
     {
         // Codigo para voltearse o alinearse (dependiendo del nivel) cuando se acerque el protagonista.
         Debug.Log("Ignorando");
+        float dist = ObjectiveDistance().magnitude;
+
+        if (dist < 5 && !isRotating)
+            StartRotation();
+
+        if (isRotating)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, timer / smoothTime);
+            transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, t);
+
+            if (timer >= smoothTime && dist > 5)
+            {
+                timer = 0f;
+                isRotating = false;
+                currentRotation = targetRotation;
+            }
+        }
+    }
+
+    public void StartRotation()
+    {
+        targetRotation = Quaternion.Euler(transform.rotation.eulerAngles + Vector3.up * 180f);
+        currentRotation = transform.rotation;
+        timer = 0f;
+        isRotating = true;
     }
 
     private void Wall()
@@ -110,15 +155,26 @@ public class Enemy : MonoBehaviour
         float dist = ObjectiveDistance().magnitude;
         if (dist > 2) // Si el jugador esta lejos, lo miran
             Look();
-        else // Cuando se acerca vuelven a formacion y le impiden pasar
-            Ignore(); // hacer el modulo de formacion
+        // Cuando se acerca vuelven a formacion y le impiden pasar
+        // hacer el modulo de formacion
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player" && this.variation == 1)
+        {
+            Rigidbody playerRb = other.gameObject.GetComponent<Rigidbody>();
+
+            // Calculate the direction from the enemy to the player
+            Vector3 pushDirection = other.transform.position - transform.position;
+            pushDirection.Normalize();
+
+            // Apply an impulse force to the player in the opposite direction
+            playerRb.AddForce(pushDirection * 70f, ForceMode.Impulse);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && variation == 2) // Colision de desinteres
-        {
-            Ignore();
-        }
     }
 }
