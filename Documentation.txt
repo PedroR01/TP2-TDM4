@@ -8,4 +8,9 @@ With Visual Studio Community 2022 v17.5.4
 
 3. Enable touch simulation in unity. Window > Analysis > Input Debugger > Options > Simulate Touch Input From Mouse or Pen
 
+4. Install ProBuilder (5.0.7)
+
 PD: Plane texture from https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-textures-204742
+
+Bugs fixed record:
+1. Triangle shape made with ProBuilder is moving with Mirar (look) function. Solved by centering the pivot (with ProBuilder menu) and freezing Y axis in position and rotation in Rigidbody component.
