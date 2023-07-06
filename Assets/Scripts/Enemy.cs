@@ -2,7 +2,6 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Enemy : MonoBehaviour
 {
@@ -20,7 +19,7 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody rb;
 
-    private float rotationSpeed = 90f;
+    //private float rotationSpeed = 90f;
     private float smoothTime = 1f;
 
     private Quaternion targetRotation;
