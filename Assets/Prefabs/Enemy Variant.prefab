@@ -11,21 +11,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 1156247805022911877, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1156247805022911878, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156247805022911878, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156247805022911878, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 1156247805022911878, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,10 +55,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 168.178
       objectReference: {fileID: 0}
-    - target: {fileID: 1156247805022911878, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1156247805022911879, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -85,27 +69,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1156247805022911883, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
       propertyPath: m_VersionIndex
-      value: 3503
+      value: 3509
       objectReference: {fileID: 0}
     - target: {fileID: 1156247805022911884, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
       propertyPath: speed
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 1156247805022911884, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 908137354742782358, guid: 0901d4888dc6f1644ae0ed3ea0c23772, type: 3}
-    - target: {fileID: 1156247805022911885, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
-      propertyPath: m_Drag
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1156247805022911885, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
       propertyPath: m_Mass
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156247805022911885, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}
-      propertyPath: m_AngularDrag
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0eeb68c6f0ce6ba45952a569ec119b9f, type: 3}

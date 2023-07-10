@@ -6,48 +6,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Vector3 targetScale = new Vector3(2f, 2f, 2f);
-    [SerializeField] private float duration = 2f;
-    [SerializeField] private float returnDuration = 1f;
+    [SerializeField] private float duration = .5f;
+    [SerializeField] private float returnDuration = .5f;
 
     private Vector3 initialScale;
-    private float timer;
-    private bool isScaling;
+    private Coroutine scalingCoroutine;
 
     private void Start()
     {
         initialScale = transform.localScale;
-        timer = 0f;
-        isScaling = false;
-    }
-
-    private void Update()
-    {
-        if (!isScaling)
-        {
-            // Smoothly return to initial scale
-            if (timer < returnDuration)
-            {
-                timer += Time.deltaTime;
-                float t = timer / returnDuration;
-                Vector3 currentScale = Vector3.Lerp(targetScale, initialScale, t);
-                currentScale.z = transform.localScale.z; // Maintain the initial Y scale
-                transform.localScale = currentScale;
-            }
-            return;
-        }
-
-        timer += Time.deltaTime;
-        if (timer >= duration)
-        {
-            timer = duration;
-            isScaling = false;
-        }
-
-        float t2 = timer / duration;
-        Vector3 currentScale2 = Vector3.Lerp(initialScale, targetScale, t2);
-        currentScale2.z = transform.localScale.z; // Maintain the initial Y scale
-
-        transform.localScale = currentScale2;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,8 +26,10 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.name == "Big")
         {
-            isScaling = true;
-            timer = 0f;
+            if (scalingCoroutine != null)
+                StopCoroutine(scalingCoroutine);
+
+            scalingCoroutine = StartCoroutine(ScaleCharacter(targetScale, duration));
         }
     }
 
@@ -73,10 +42,29 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.name == "Big")
         {
-            isScaling = false;
-            timer = 0f;
-            transform.localScale = initialScale;
+            if (scalingCoroutine != null)
+                StopCoroutine(scalingCoroutine);
+
+            scalingCoroutine = StartCoroutine(ScaleCharacter(initialScale, returnDuration));
         }
+    }
+
+    private IEnumerator ScaleCharacter(Vector3 target, float time)
+    {
+        float timer = 0f;
+        Vector3 initialScale = transform.localScale;
+
+        while (timer < time)
+        {
+            timer += Time.deltaTime;
+            float t = timer / time;
+            Vector3 newScale = Vector3.Lerp(initialScale, target, t);
+            newScale.y = initialScale.y; // Maintain initial Y scale
+            transform.localScale = newScale;
+            yield return null;
+        }
+
+        transform.localScale = target;
     }
 
     private void OnCollisionEnter(Collision other)

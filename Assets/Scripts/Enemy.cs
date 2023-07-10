@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour
                 break;
 
             case 2: // Los enemigos del nivel vanidad
+                Look();
                 break;
 
             case 3: // Los enemigos del nivel desinteres

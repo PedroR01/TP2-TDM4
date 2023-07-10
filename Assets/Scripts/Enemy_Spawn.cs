@@ -26,7 +26,7 @@ public class Enemy_Spawn : MonoBehaviour
 
             int numberOfEnemies; // Especifica la cantidad de enemigos que se quieren instanciar
             if (behaviour == 0)
-                numberOfEnemies = 10;
+                numberOfEnemies = 7;
             else if (behaviour != 1)
                 numberOfEnemies = 5;
             else
@@ -66,7 +66,7 @@ public class Enemy_Spawn : MonoBehaviour
 
         if (behaviour != 1)
         {
-            spawnOffset = new Vector3(Random.Range(3f, 8f), 0, Random.Range(3f, 8f));
+            spawnOffset = new Vector3(Random.Range(1f, 2.5f), 0, Random.Range(0f, 7f));
             spawnPosition = spawn.position + Vector3.right * spawnOffset.x + Vector3.forward * spawnOffset.z;
         }
         else
